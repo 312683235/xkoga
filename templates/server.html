@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load  staticfiles %}
+
+{% block title %}
+     {% for sers in sers %}{{ sers.title }}{% endfor %}
+{% endblock %}
+
+
+{% block style %}
+    <script type="text/javascript" src="{% static 'js/bioV4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.lazyload.mini.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/tzjg.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/tzjg.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+ 	<div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
+	<div class="container pb-15">
+	<!-- Example row of columns -->
+	<div class="row">
+		<div class="span12">
+       
+   
+ <!--内容页面-->     
+                         {% for sers in sers %}
+  <div class="label-div b-30 border-all pt-5 t-20" style="position: relative; padding-left: 0;">
+   
+   
+   <div class="mmdh"><a href="/index/">首页</a> > <a href="/server/">创新服务</a> > <a href="/server-{{ sers.id }}/">{{ sers.title }}</a></div>
+ 
+   
+     <div class="news-list">
+  		<div class="clearfix pt-3">
+		  <div class="index-news-img spanm3 pull-left pt-5">
+						<a href="javascript:;" title="标题标题标题" target="_blank" rel="bookmark">
+                        <img class="lazyloadimg" alt="标题标题标题标题标题标题" src="{% static 'images/yy1.jpg' %}"/></a>
+		 </div>
+  	<div class="offset3 intro">
+
+		<h1><span class="pull-right runing">{{ sers.state }}</span> <a title="标题标题标题标题"  target="_blank" href="javascript:;">{{ sers.title }}</a></h1>
+
+	<p class="t-1 mt1"></p>
+    <div class="clearfix" style="height: 22px;margin-top: 0px;">
+    <div class="pull-left myxx">	
+            <i class="m"><a href="javascript:;" target="_blank">{{ sers.city }}</a></i>
+            <i class="m"><a href="javascript:;" target="_blank">{{ sers.category }}</a></i>
+            <i class="m">{{ sers.time | date:'Y年m月d日' }}</i>
+        </div>
+  
+         <div class="pull-right">
+
+			<a class="read-btn ie6png" href="javascript:void(0);" title="277次阅读">{{ sers.look_num }}</a>
+		 </div>
+       </div>
+        </div>
+    </div>
+  </div>
+ 
+</div>
+
+
+
+	  <!--第二部分开始-->		
+         
+         <div class="label-div b-30 border-all pt-5 t-20" style="position:relative; padding-left:26px;">
+            
+            
+            <div class="second">
+         
+                <h5 class="mmh5 b-20">项目介绍</h5>
+               <div class="mmcontent">
+              {{ sers.desc }}
+            </div>
+            
+            
+            <h5 class="mmh5 t-20 b-20">产品截图</h5>
+             <div class="mmpic t-45">
+               <div class="leftjj"><img src="{% static 'images/leftjj.jpg' %}" /></div>
+               <div class="rightjj"><img src="{% static 'images/rightjj.jpg' %}" /></div>
+             
+                <div class="mmpicshow">
+                    <dl>
+                      <dd>
+                      	<p><img src="{{ MEDIA_URL }}{{ sers.images }}" /></p>
+
+                      </dd>
+
+
+                  </dl>    
+                 
+                </div>
+            </div>
+            
+            
+            
+            <h5 class="mmh5 t-20 b-20">产品历程</h5>
+            <div class="mmhdm b-30">
+              <dl class="mydllist">
+              <dd id="mmtwo"><span class="ml"></span><span class="mm"><a href="">数据</a></span><span class="mr"></span></dd>
+              <dd id="mmthree"><span class="ml"></span><span class="mm"><a href="">资本</a></span><span class="mr"></span></dd>
+              <dd id="mmfour"><span class="ml"></span><span class="mm"><a href="">产品</a></span><span class="mr"></span></dd>
+              <dd id="mmfive"><span class="ml"></span><span class="mm"><a href="">专利</a></span><span class="mr"></span></dd>
+              <dd id="mmsix"><span class="ml"></span><span class="mm"><a href="">资质</a></span><span class="mr"></span></dd>
+              <dd id="mmseven"><span class="ml"></span><span class="mm"><a href="">其他</a></span><span class="mr"></span></dd>
+               
+               </dl>
+            <div class="mmclear"></div>
+            </div>
+            
+            
+            
+
+            
+            <div class="mmcontent b-30 t-20" id="mbtwo" style="display:none;">
+            {{ sers.pro_data }}
+            </div>
+            
+            <div class="mmcontent b-30 t-20" id="mbthree" style="display:none;">
+                 {{ sers.pro_capital }}
+            </div>
+            
+            
+            <div class="mmcontent b-30 t-20" id="mbfour" style="display:none;">
+             {{ sers.pro_pro }}
+            </div>
+            
+            <div class="mmcontent b-30 t-20" id="mbfive" style="display:none;">
+             {{ sers.pro_patent }}
+            </div>
+            
+            <div class="mmcontent b-30 t-20" id="mbsix" style="display:none;">
+            {{ sers.pro_qua }}
+            </div>
+            
+            <div class="mmcontent b-30 t-20" id="mbseven" style="display:none;">
+        {{ sers.pro_other }}
+            </div>
+            
+            
+            
+            <h5 class="mmh5 t-20 b-20">团队成员</h5>
+               <div class="mmcontent">
+            {{ sers.member }}
+            </div> 
+            
+            
+            
+            
+          </div>
+            {% endfor %}
+            
+            
+            
+            
+           
+           
+         
+         </div>
+
+      
+      <!--第二部分结束-->
+ 
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {% endblock %}
+</div>
+</div>
+
+

@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+     {% for mechanism in mechanism %}{{ mechanism.c_name }}{% endfor %}
+{% endblock %}
+
+
+
+{% block style %}
+    <script type="text/javascript" src="{% static 'js/bioV4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.lazyload.mini.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/show.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/list.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+ {% for item in mechanism %}
+	<div class="container clearfix">
+    <div class="mmdh"><a href="/index/">首页</a> > <a href="/mechanismlist/">投资机构</a> > <a href="/mechanismlist-{{ item.id }}/">{{ item.c_name }}</a></div>
+
+   <div class="mylistshow b-20" id="mmlistshow">
+   <div class="downjiao"><img src="{% static 'images/downjiao.jpg' %}" alt="hide"/></div>
+  <dl class="mydllist">
+  <dd>关注领域：</dd>
+  <dd class="selected"><span class="ml"></span><span class="mm"><a href="/menchanism/">全部</a></span><span class="mr"></span></dd>
+
+  <dd><span class="ml"></span><span class="mm"><a href="?category={{ item.id }}">{{ item.category }} </a><i></i></span><span class="mr"></span></dd>
+    {% endfor %}
+  </dl>
+
+  <div class="mmclear"></div>
+  </div>
+    </div>
+
+	<div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
+	<div class="container pb-15">
+	<!-- Example row of columns -->
+	<div class="row">
+		<div class="span12">
+    {% for mechanism in mechanism %}
+     <div class="label-div b-30 border-all pt-5 t-20" style="position: relative; padding-left: 0;">
+      <div class="mmright2 t-30">
+          <img src="{{ MEDIA_URL }}{{ mechanism.img }}" />
+       </div>
+
+  	  <div class="mmleft t-30">
+
+       <h5>{{ mechanism.c_name }}</h5>
+
+      <div class="decoration">{{ mechanism.add_time }} 　{{ mechanism.category }}　浏览量：{{ mechanism.look_num }}</div>
+
+          <div class="info">
+           <dl>
+              <dd><span class="t">中文简介：</span> <span>{{ mechanism.c_name }}</span></dd>
+              <dd><span class="t">英文简称：</span> <span>{{ mechanism.e_name }}</span></dd>
+              <dd><span class="t">网　　址：</span> <span>{{ mechanism.url }}</span></dd>
+              <dd><span class="t">成立时间：</span> <span>{{ mechanism.creation_time }}</span></dd>
+              <dd><span class="t">注册地点：</span> <span>{{ mechanism.core }}</span></dd>
+              <dd><span class="t">机构总部：</span> <span>{{ mechanism.core }}</span></dd>
+           </dl>
+    	 </div>
+
+      </div>
+
+
+      <!--警告：切勿删除-->
+     <!--[if IE 6]> <a class="follow-btn ie6png mmmzw"></a><![endif]-->
+
+	 <div class="mmclear"></div>
+
+
+	 <div class="mmcontent t-20">
+		<span class="pc157AC0">机构简介：</span>
+
+        {{ mechanism.desc }}
+        <div class="pc157AC0" style="margin:20px 0 0 0;">机构投资事件</div>
+
+	  <table class="mytable" cellpadding="0" cellspacing="0">
+      <tr><th>受资方</th><th>投资方</th><th>行属行业</th><th>投资时间</th></tr>
+      <tr><td>{{ mechanism.accept }}</td><td>{{ mechanism.invest }}</td><td>{{ mechanism.category }}</td><td>{{ mechanism.invest_time }}</td></tr>
+
+    </table>
+    <br/>
+    <span class="pc157AC0">机构投资介绍：</span>
+         {{ mechanism.content }}
+
+
+
+	 </div>
+
+
+
+
+
+  </div>
+{% endfor %}
+
+</div>
+
+
+
+
+{% endblock %}
+	</div>
+</div>

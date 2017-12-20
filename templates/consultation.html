@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+     {% for consul in consul %}{{ consul.title }}{% endfor %}
+{% endblock %}
+
+{% block style %}
+    <script type="text/javascript" src="{% static 'js/bioV4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.lazyload.mini.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/zx_info.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/zx_info.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+ 	<div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
+	<div class="container pb-15">
+	<!-- Example row of columns -->
+	<div class="row">
+		<div class="span12">
+
+
+ <!--内容页面-->
+
+  <div class="label-div b-30 border-all pt-5 t-20" style="position: relative; padding-left: 0;">
+
+  {% for consul in consul %}
+   <div class="mmdh pull-left"><a href="/index/">首页</a> > <a href="/consultation/">创新咨询</a> > <a href="/consultation-{{ consul.id }}/">{{ consul.title }}</a></div>
+   <div class="mmkey pull-right"><b><a href="">{{ consul.tag }}</a></b><div class="mmclear"></div></div>
+
+   <div class="mmclear"></div>
+
+
+
+
+   <div style="margin-top: 14px;" class="clearfix pb-12 pl-25 pr-25">
+						<h1 class="pull-left r-10">{{ consul.title }}</h1>
+						<div class="pull-left pt-5 none-768" style="_margin-top:-33px; _margin-left:-10px;">
+                        <span class="like-plug-gz clearfix pull-left r-15">
+                        <a title="感兴趣，关注一下吧" href="javascript:void(0);" class="like-btn pull-right ie6png">关注本文</a>
+                        <span class="count pull-left t-5 d-none"></span>
+                        </span>
+                        </div>
+	</div>
+
+
+
+  <div style="margin-top: 4px;" class="clearfix pl-25 pr-25">
+						<div class="pull-left">
+
+				<span class="r-15 pull-left"><span class="fc999 l-5">{{ consul.time | date:'Y年m月d日' }}</span></span>
+			    <span class="fc999 l-20 pull-left">涉及公司：
+                	<span data-obj="News" data-oid="104437" id="obj_hits" class="fc999">{{ consul.company }}</span>
+                </span>
+		</div>
+ </div>
+
+ <div class="view-main t-20 pl-25 pr-25">
+
+  <table style="width: 100%;" class="fc333 border-all">
+		<tbody><tr>
+			<td style="padding: 5px 12px;width: 25px;font-size: 22px;text-align: center;background: #E8E8E8; line-height: 30px;color: #999">导读</td>
+			<td style="padding: 10px 10px 12px;line-height: 24px;">{{ consul.desc }}</td>
+			</tr>
+	</tbody></table>
+
+    <div class="view-content" style="margin-top: 18px;">
+      {{ consul.content }}
+
+    </div>
+
+
+  </div>
+
+   {% endfor %}
+  <!--警告：切勿删除-->
+  <!--[if IE 6]> <a class="follow-btn ie6png mmmzw"></a><![endif]-->
+
+</div>
+
+
+<!---代码分享-->
+<div class="t-10 label-div border-all pr-5   pb-10 pl-20 clearfix">
+    <div data-bind-msg-win-url="/share/bindmsgwin.html" data-back-url="aHR0cDovL3d3dy5iaW9kaXNjb3Zlci5jb20vbmV3cy9wb2xpdGljcy8xMDQ0MzcuaHRtbCNDQw==" data-pic="http://pic.biodiscover.com/files/c/6f/biodiscover1367054353.6725604.jpg" data-content="美国麻省理工学院（MIT）预测了2013年10大可能改变世界的创新科技技术。MIT预测的未来科技新趋势，可是想要获得致胜先机的科技企业大厂不可或缺的商业参考利器，企业可根据这些预测提早掌握关键的革新技术..." data-title="2013年10大可能改变世界的创新科学技术" data-url="http://www.biodiscover.com/news/politics/104437.html#CC" data-id="104437" data-type="News" data-islogin="0" class="share share-plug">
+		<span style="height: 28px;line-height: 28px;color: #000;" class="pull-left r-10">分享到：</span>
+    	<div style="margin-top: 7px;" class="pull-left clearfix">
+    		<a href="javascript:void(0);" data-forward-href="/share/sinaforward.html?action=go" data-weibo-id="3571993536727890" data-to="sina" id="sina" class="bio_button_sina pull-left ie6png r-10 ">新浪微博</a>
+
+    		<a href="javascript:void(0);" data-forward-href="/share/qqforward.html?action=go" data-weibo-id="" data-to="qq" id="qq" class="bio_button_tencent pull-left ie6png r-10 ">腾讯微博</a>
+    		<a href="javascript:void(0);" data-forward-href="/share/renrenforward.html?action=go" data-weibo-id="" data-to="renren" id="renren" class="bio_button_renren pull-left ie6png r-10 ">人人网</a>
+    		<a href="javascript:void(0);" data-forward-href="/share/linkinforward.html?action=go" data-weibo-id="" data-to="linkin" id="linkin" class="bio_button_linkin pull-left ie6png r-10 ">LinkedIn</a>
+    	</div>
+    	<div style="margin-top: 3px; margin-left: 20px;" class="pull-right">
+    		</div>
+    </div>
+</div>
+<!---代码分享-->
+
+
+<!--讨论区-->
+
+<div id="comment_div" class="t-10 label-div border-all pr-20 pt-50 pl-20">
+	 <!-- 评论箱  -->
+     <div class="comment"><div class="comment_box_comment" id="comment-box">
+	<div class="post-div">
+	<form action="/comment/" id="form_comment" name="form_comment" method="post">
+	<div class="user-img">
+    <a title="游客" href="javascript:;">
+    <img alt="游客" src="{% static 'images/uuuser.jpg' %}">
+    </a>
+    </div>
+
+
+
+
+
+
+
+
+		<div class="weiboComments">
+
+            <div class="com-textarea ie6png">
+				<input type="hidden" value="News" id="data_obj_type" name="data[obj_type]">
+	            <input type="hidden" value="104437" id="data_obj_id" name="data[obj_id]">
+	            <input type="hidden" value="" id="data_uid" name="data[uid]">
+	            <input type="hidden" value="0" id="data_pid" name="data[pid]">
+	            <input type="hidden" value="" id="data_share" name="data[share]">
+	            <input type="hidden" value="aHR0cDovL3d3dy5iaW9kaXNjb3Zlci5jb20vbmV3cy9wb2xpdGljcy8xMDQ0MzcuaHRtbCNDQw==" id="data_url" name="data[url]">
+
+
+                <form action="/comment/" method="post">
+
+                <textarea onblur="if(this.value==''){this.value='有什么感想？你也来说说吧！';$(this).next().val('有什么感想？你也来说说吧！')};textCounter($(this), $(this).parents('form').find('#remLen'),140)" onfocus="if(this.value=='有什么感想？你也来说说吧！'){this.value=''};" onmousemove="textCounter($(this), $(this).parents('form').find('#remLen'),140)" onkeyup="textCounter($(this), $(this).parents('form').find('#remLen'),140);" onkeydown="textCounter($(this), $(this).parents('form').find('#remLen'),140);" id="data_content" name="consulcomment" style="_width: 98%;">有什么感想？你也来说说吧！</textarea>
+
+
+
+                <input type="hidden" value="有什么感想？你也来说说吧！" id="data_content2">
+				<input type="hidden" value="comment" id="class" name="class">
+				<span class="head-msg">还可以输入<span id="remLen">140</span>字</span>
+				<span style="color: #000;position: absolute;left: 0;top: -35px;height: 22px;line-height: 20px;font-family: '微软雅黑';font-size: 14px;">讨论区：</span>
+			</div>
+
+
+
+			<div class="post-toolbar">
+				<div class="post-options">
+                    {% for consul in consul %}
+                 <input type="hidden" value="{{ consul.id }}" name="artcile_id">
+                    {% endfor %}
+				</div>
+                <input type="submit" style="float: right" value="评论">
+				<!-- loadding -->
+			</div>
+		</div>
+        {% csrf_token %}
+	</form>
+	</div>
+	<div class="comments-info clearfix">
+		<div class="comments-tab left"><a href="javascript:void(0);"><span class="rows_count">{{ comment_num }}</span> 条评论</a></div>
+
+	</div>
+	<ul class="comments-list clearfix">
+      <li class="cleaarfix p1">
+          {% for comm in comment %}
+			<div class="left post-img">
+				<a target="_blank" href="javascript:;" title="标题标题"><img src="{{ MEDIA_URL }}{{ comm.username.avatar }}" alt="标题标题"></a>
+			</div>
+			<div class="post-info">
+
+				<div style="line-height: 16px;margin-bottom: 9px;"><a class="fs14 r-10" target="_blank"  title="jack_radio">{{ comm.username }}</a><span class="fc999">{{ comm.time | date:'Y-m-d' }}</span></div>
+				<div class="fc666 b-5">
+				{{ comm.content }}
+                </div>
+
+				<div>
+					<a href="javascript:void(0);" data-id="3684" class="comment_reply_comment" title="回复">回复</a>
+				</div>
+
+				<!-- reply_box -->
+			</div>
+             {% endfor %}
+			<div class="clear"></div>
+		</li>
+
+
+</ul>
+	<div data-by="desc" data-size="12" data-url="/comment/commentList.html?class=comment&amp;type=News&amp;id=104437" data-page="1" onclick="comment_list('.comment_box_comment')" class="load load_more d-none" style="display: none;"><a title="加载更多" href="javascript:void(0);">加载更多</a></div>
+	<div class="load load_loading" style="display: none;"><a title="正在加载" href="javascript:void(0);"><img src="{% static 'images/loadding.gif' %}"> 正在加载</a></div>
+	<div class="load load_none d-none" style="display: none;"><a title="没有更早的了" href="javascript:void(0);">没有更早的了</a></div>
+</div>
+
+
+</div>
+			</div>
+
+
+
+
+<!--讨论区结束-->
+
+
+
+</div>
+
+
+
+    {% endblock %}
+	</div>
+</div>
+
+
+

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}创新资讯{% endblock %}
+
+{% block style %}
+    <script type="text/javascript" src="{% static 'js/bioV4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.lazyload.mini.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/cxzx_list.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/list.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+
+	<div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
+    
+    
+    
+	<div class="container pb-15">
+	<!-- Example row of columns -->
+	<div class="row">
+		<div class="span12">
+        
+        <div class="clearfix pb-15" style=" position:relative;">
+				<div class="pull-left classifyDIV pt-10">
+                    <a class="pull-left type-css nosel">创新咨讯</a>
+
+                    
+				</div>
+				<div style="position: absolute; right:0px; background:#06f;" class="pull-right t-20 classifySearch" >
+					</div>
+	</div>
+        
+    
+ <!--列表开始-->     
+                         
+    <!--第一个-->    {% for consul in consul.object_list %}
+  <div class="label-div b-30 border-all pb-20 pt-5" style="position: relative; padding-left: 0;">
+   
+      <div class="pl-20" style="margin-left: 1px;margin-top: 3px;">
+
+      </div>
+      
+	  <div class="news-list">
+
+	 <div class="clearfix none-768 pl-20" style="position: absolute;top: 0;right: 15px;">
+	 <a class="tags-box l-10 fc999 pull-left" title="{{ consul.tag }}" href="javascript:;">{{ consul.tag }}</a>
+
+	 </div>
+
+	<div class="clearfix pt-3">
+		  <div class="index-news-img spanm3 pull-left pt-5">
+						<a href="/consultation-{{ consul.id }}/" title="标题标题标题" target="_blank" rel="bookmark">
+                        <img class="lazyloadimg" alt="标题标题标题标题标题标题" src="{{ MEDIA_URL }}{{ consul.images }}"/></a>
+		 </div>
+  	<div class="offset3 intro">
+		<h1>
+        <a title="标题标题标题标题" target="_blank" href="/consultation-{{ consul.id }}/">{{ consul.title }}</a>
+        </h1>
+	  
+      <div class="clearfix" style="height: 22px;margin-top: 0px;">
+			<div class="pull-left myxx">	
+           
+
+            <i class="m">{{ consul.category }}</i>
+            <i class="m">{{ consul.time | date:'Y年m月d日' }}</i>
+        </div>
+            
+          <div class="pull-right">
+
+		 </div>
+	</div>
+	<p class="t-1">{{ consul.desc }}</p>
+    
+         <div class="clearfix">
+        <a href="/consultation-{{ consul.id }}/" title="阅读全文" target="_blank" rel="bookmark" class="read-all pull-left">阅读全文</a></div>
+         </div>
+    </div>
+  </div>
+</div>
+    <!--第一个结束-->      
+    {% endfor %}
+  <!--列表结束-->         
+
+
+<div class="pagination center pagination-large pt-20">
+
+<ul id="yw1" class="yiiPager">
+
+    {% if consul.has_previous %}
+      <li class="previous">  <a href="?{{ consul.previous_page_number.querystring }}">&lsaquo;&lsaquo;上一页</a></li>
+    {% endif %}
+
+     {% for page in consul.pages %}
+        {% if page %}
+            {% ifequal page consul.number %}
+
+                <li class="page selected"><a href="">{{ page }}</a></li>
+            {% else %}
+                <li class="page"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+            {% endifequal %}
+        {% else %}
+            ...
+        {% endif %}
+     {% endfor %}
+
+    {% if consul.has_next %}
+        <li class="next"><a href="?{{ consul.next_page_number.querystring }}">下一页 &rsaquo;&rsaquo;</a></li>
+
+    {% endif %}
+
+</ul>
+
+</div>
+		</div>
+
+      {% endblock %}
+      <!--右侧代码-->
+</div>
+</div>

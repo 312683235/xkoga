@@ -1,0 +1,359 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}项目发布{% endblock %}
+{% block style %}
+    <script type="text/javascript" src="{% static 'js/bioV4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.lazyload.mini.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/dyfrom.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/xm_write.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/xm_write.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+
+ 	<div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
+	<div class="container pb-15">
+	<!-- Example row of columns -->
+	<div class="row">
+		<div class="span12">
+
+
+ <!--内容页面-->
+
+  <div class="label-div b-30 border-all pt-5 t-20" style="position: relative; padding-left: 0;">
+     <div class="txmd">
+
+     <h4 class="mmh4">提交项目基本信息</h4>
+     <h6 class="mmh6">平均用时3分钟，您的项目即可以被收录到数据库中</h6>
+
+     <form action="/public/" method="post" enctype="multipart/form-data">
+     <div  class="basic">
+        您的基本资料
+     </div>
+
+     <div class="control-group">
+                <label class="control-label" for="inputName">姓名
+
+                    <p class="text-error">必填项</p>
+                </label>
+
+                <div class="controls">
+                    <input id="inputName" type="text" name="name" value="{{ project_from.name.value }}"
+                           placeholder="请填写真实姓名" class="input-xlarge placeholder on" maxlength="10" rel="input-text"  >
+                    <span class="help-inline">请填写真实姓名</span>
+                </div>
+                <div class="mmclear"></div>
+
+            </div>
+
+
+       <div class="control-group">
+                <label class="control-label" for="inputEmail">E-mail
+                    <p class="text-error">必填项</p>
+                </label>
+
+                <div class="controls">
+                    <input id="inputEmail" type="email" placeholder="请填写邮箱" value="{{ project_from.email.value }}"
+                           class="input-xlarge placeholder on" rel="input-email" name="email">
+                    <span class="help-inline"></span>
+                </div>
+                <div class="mmclear"></div>
+            </div>
+
+
+            <div class="control-group">
+                <label class="control-label" for="inputPhone">电话
+                    <p class="text-error">必填项</p>
+                </label>
+
+                <div class="controls">
+                    <input type="text" id="inputPhone" value="{{ project_from.mobile.value }}"
+                           placeholder="请填写真实手机号，我们会联系您确认信息" maxlength="11" rel="input-phone"
+                           class="input-xlarge placeholder on" name="mobile">
+                    <span class="help-inline"></span>
+                </div>
+                <div class="mmclear"></div>
+            </div>
+
+
+
+
+            <div class="control-group ">
+                <label class="control-label" for="inputRole">职务
+                    <p class="text-error">必填项</p>
+                </label>
+                <div class="controls">
+                    <input id="inputRole" type="text" name="postion" value="{{ project_from.postion.value }}" placeholder="团队项目负责人"
+                           class="input-xlarge placeholder on" maxlength="10" rel="input-text">
+                    <span class="help-inline"></span>
+                </div>
+                <div class="mmclear"></div>
+            </div>
+
+
+                        <div class="control-group">
+                <label class="control-label" for="avatarUpload">上传头像<p class="text-error">必填项</p></label>
+
+                <div class="controls">
+                    <div id="avatarUpload">
+                        <img src="{% static 'images/uphoto.jpg' %}" rel="img-target-avatar"
+                             data-value="0" data-check="eb1ae6331b63d1ad95006586c4add55b"
+                             class="active img-target img-on">
+                        <span class="help-inline"></span>
+                    </div>
+
+                    <button type="button" modal-target="#img-modal" rel="ajax-upload-avatar" class="btn btn-primary uploadphoto" onclick="uphoto()">
+                        上传头像
+                    </button>
+                    <input type="file" name="avatar"/>
+          <span class="help-block">
+            请上传jpg/jpeg/png/gif格式文件，文件小于1MB
+          </span>
+                </div>
+                <div class="mmclear"></div>
+            </div>
+
+
+
+
+        <div  class="basic b-20">
+        产品的基本资料
+     </div>
+      <div class="control-group ">
+                <label class="control-label" for="inputProductName">产品名称<p class="text-error">必填项</p></label>
+
+                <div class="controls">
+                    <input id="inputProductName" type="text" name="product_name"
+                           value="{{ project_from.product_name.value }}"
+                           placeholder="只填写产品" class="input-xlarge on check-exist placeholder"
+                           maxlength="30" rel="input-text">
+                    <span class="help-inline"></span>
+                </div>
+                <div class="mmclear"></div>
+            </div>
+            <div class="control-group ">
+                <label class="control-label" for="inputWebsite">网址<p class="text-error">必填项</p></label>
+
+                <div class="controls">
+                    <input id="inputWebsite" name="url" type="text"
+                           value="{{ project_from.url.value }}"
+                           placeholder="如：www.xxx.com" class="input-xlarge on placeholder" maxlength="100"
+                           rel="input-url">
+                    <span class="help-inline"></span>
+                </div>
+                <div class="mmclear"></div>
+            </div>
+            <div class="control-group ">
+                <label class="control-label" for="inputProductWeibo">产品官方微博<p>选填项</p></label>
+
+                <div class="controls">
+                    <input id="inputProductWeibo" name="weibo" type="text"
+                           value="{{ project_from.weibo.value }}"
+                           placeholder="请填写产品官方微博的URL" class="input-xlarge placeholder">
+                    <span class="help-inline"></span>
+                </div>
+                <div class="mmclear"></div>
+            </div>
+
+             <div class="control-group">
+                <label class="control-label">分类
+                    <p class="text-error">必填项</p>
+
+                    <p class="text-error">（最多三项）</p>
+
+                </label>
+
+               <div class="mtype pull-left" style="position:relative; width:78%;">
+
+    <dl>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="游戏">游戏</dd>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="硬件">硬件</dd>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="工具">工具</dd>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="旅游">旅游</dd>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="体育">体育</dd>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="教育">教育</dd>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="媒体">媒体</dd>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="硬件">硬件</dd>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="工具">工具</dd>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="旅游">旅游</dd>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="体育">体育</dd>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="教育">教育</dd>
+  <dd><input type="checkbox" name="category" style="margin-left: 10px"  value="媒体">媒体</dd>
+</dl>
+  </div>
+
+
+
+
+                <div class="mmclear"></div>
+            </div>
+
+
+
+
+            <div class="control-group">
+                <label for="inputLocation" class="control-label">地区
+                    <p class="text-error">必填项</p></label>
+
+                <div class="controls">
+                    <div id="inputLocation">
+       <select name="addr" id="provinceid" class="location-select span2" >
+        {% for city in city %}
+            <option value="{{ city.name }}" selected="selected">{{ city.name }}</option>
+        {% endfor %}
+    </select >
+
+{#<span id="city">#}
+{#    <select name='cityid[]' id='cityid' class='span2'><option value='1000' selected='selected'>东城区</option><option value='1001'>西城区</option><option value='1002'>崇文区</option><option value='1003'>宣武区</option><option value='1004'>朝阳区 </option><option value='1005'>丰台区</option><option value='1006'>石景山区</option><option value='1007'>海淀区</option><option value='1008'>门头沟区</option><option value='1009'>房山区</option><option value='1010'>通州区</option><option value='1011'>顺义区 </option><option value='1012'>昌平区</option><option value='1013'>大兴区</option><option value='1014'>怀柔区</option><option value='1015'>平谷区</option><option value='1016'>密云县</option><option value='1017'>延庆县</option></select>#}
+{#  </span>#}
+
+
+                    </div>
+                </div>
+                 <div class="mmclear"></div>
+            </div>
+
+
+            <div class="control-group ">
+                <label for="inputLaunchTime" class="control-label">产品初版上线时间<p class="text-error">必填项</p></label>
+
+                <div class="controls">
+                    <input type="text" name="run_time">
+                    <span class="help-inline"></span>
+                </div>
+                 <div class="mmclear"></div>
+            </div>
+            <div class="control-group ">
+                <label class="control-label">LOGO<p class="text-error">必填项</p></label>
+
+                <div class="controls">
+                    <div id="logoUpload">
+                        <img src="{% static 'images/xmlogo.jpg' %}/"
+                             rel="img-target-logo"
+                             data-value="0"
+                             data-check="a86d4a9f4efdc578c791dd86edca102b"
+                             class="img-target img-on ">
+                        <span class="help-inline"></span>
+                    </div>
+                    <button type="button" modal-target="#img-modal" rel="ajax-upload-logo" class="btn btn-primary mmuploadlogo2" onclick="uplogo()">
+                        上传LOGO
+                    </button>
+                     <input type="file" name="logo"/>
+          <span class="help-block">
+            请上传jpg/jpeg/png/gif格式文件，文件小于1MB
+          </span>
+                </div>
+                 <div class="mmclear"></div>
+            </div>
+
+            <div class="control-group ">
+                <label class="control-label" for="inputNeedtail">一句话简介
+                    <p class="text-error">必填项</p>
+                </label>
+
+                <div class="controls">
+                    <textarea id="inputNeedtail" type="text" placeholder="以极简的文字说明产品解决的需求"
+                              class="input-xlarge placeholder on" maxlength="45" rel="text-area"
+                              name="desc"
+                    >{{ project_from.desc.value }}</textarea>
+                    <span class="help-inline"></span>
+                     <p>还可输入<span rel="inputNeedtail" class="myhelp-inline" id="hnum">45</span>字</p>
+
+				</div>
+                 <div class="mmclear"></div>
+                <div style="margin-left:20%;">
+                 <span class="block muted"><small>如下厨房填写的：菜谱分享网站。</small></span>
+                    <span class="block muted"><small>错误1：带产品名：不要写"下厨房是一个菜谱分享网站"，而写"菜谱分享网站"</small></span>
+                    <span class="block muted"><small>错误2：用太抽象的概念描述：不要写"O2O项目"，而一定要具体到比如"帮助上午检测用户优惠使用情况"</small></span>
+                </div>
+
+
+
+            </div>
+
+            <div class="control-group ">
+                <label class="control-label" for="textAbstract">产品介绍
+                    <p class="text-error">必填项</p>
+                </label>
+
+                <div class="controls">
+                    <textarea id="textAbstract" placeholder="请填写您产品、公司以及团队的信息，建议大于100字。介绍的越详细，越容易得到网友和投资人关注哦。" rows="4"
+                              class="input-xlarge placeholder on" name="content" maxlength="300" rel="text-area">{{ project_from.content.value }}</textarea>
+                    <span class="help-inline"></span>
+
+                    <p>还可输入<span rel="textAbstract" class="myhelp-inline" id="projs">300</span>字</p>
+                </div>
+   				 <div class="mmclear"></div>
+            </div>
+
+            <div class="control-group ">
+                <label class="control-label" for="inputKeywords">产品关键词<p class="text-error">必填项</p></label>
+
+                <div class="controls">
+                    <input id="inputKeywords" type="text" name="tag"
+                           value="{{ project_from.tag.value }}"
+                           class="input-xlarge on" rel="input-text">
+                    <span class="help-inline"></span>
+
+                    <p>请使用英文逗号分隔，如：O2O,移动互联网</p>
+                </div>
+                 <div class="mmclear"></div>
+            </div>
+
+
+            <div class="control-group">
+                <label for="pictureUpload"  class="control-label" >上传截图<p class="text-error">必填项</p></label>
+            <div class="controls pull-left" style="width:76%">
+                    <div rel="img-picture-target" id="pictureUpload">
+                        <img src="{% static 'images/160160.png' %}" item="0" >
+                        <img src="{% static 'images/160160.png' %}" item="1">
+                        <img src="{% static 'images/160160.png' %}" item="2">
+                      <span class="help-inline"></span>
+                </div>
+                <div class="mmclear"></div>
+                    <button type="button" modal-target="#img-modal" rel="ajax-upload-picture"
+                            class="btn btn-primary block uploadfileimg" onclick="upimg()">上传截图
+                    </button>
+                    <input type="file" name="image" id="mmupjt" value="{{ project_from.image.value }}"/>
+          <span class="help-block">
+	    请逐张上传，最多3张，剪切比例仅为4:3。支持jpg/jpeg/png/gif格式文件，文件小于2MB
+          </span>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <span class="help-block center fs16" rel="form-help"></span>
+                </div>
+                 <div class="mmclear"></div>
+            </div>
+
+     </div>
+
+
+    <div class="basic" style="border-top:1px solid #ccc; text-align:right; margin-left:15px; padding:10px 0px 5px 0px;">
+
+      <input type="submit"  value="提交" style="width:81px; height:46px;"/>
+
+    </div>
+
+     <div class="mmclear"></div>
+     {% csrf_token %}
+   </form>
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+{% endblock %}
+
+
+</div>
+</div>
+

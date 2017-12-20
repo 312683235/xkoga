@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+     {% for public in public %}{{ public.product_name }}{% endfor %}
+{% endblock %}
+
+
+{% block style %}
+    <script type="text/javascript" src="{% static 'js/bioV4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.lazyload.mini.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/show.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/list.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+{% for public in public %}
+	<div class="container clearfix">
+    <div class="mmdh"><a href="/index/">首页</a> > <a href="/publiclist/">项目信息</a> > <a href="/public-{{ public.id }}/">{{ public.product_name }}</a></div>
+
+   <div class="mylistshow b-20" id="mmlistshow">
+   <div class="downjiao"><img src="{% static 'images/downjiao.jpg' %}" alt="hide"/></div>
+
+
+  <div class="mmclear"></div>
+  </div>
+    </div>
+
+	<div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
+	<div class="container pb-15">
+	<!-- Example row of columns -->
+	<div class="row">
+		<div class="span12">
+
+     <div class="label-div b-30 border-all pt-5 t-20" style="position: relative; padding-left: 0;">
+      <div class="mmright2 t-30">
+          <img src="{{ MEDIA_URL }}{{ public.logo }}" />
+       </div>
+
+  	  <div class="mmleft t-30">
+
+       <h5>{{ public.product_name }}</h5>
+
+      <div class="decoration">{{ public.run_time }} 　{{ public.category }}　</div>
+
+          <div class="info">
+           <dl>
+              <dd><span class="t">姓   名：</span> <span>{{ public.name }}</span></dd>
+              <dd><span class="t">邮   箱：</span> <span>{{ public.email }}</span></dd>
+              <dd><span class="t">网 址：</span> <span>{{ public.url}}</span></dd>
+              <dd><span class="t">电   话：</span> <span>{{ public.mobile }}</span></dd>
+              <dd><span class="t">职   位：</span> <span>{{ public.postion }}</span></dd>
+              <dd><span class="t">地   址：</span> <span>{{ public.addr_id }}</span></dd>
+
+           </dl>
+    	 </div>
+
+      </div>
+
+
+      <!--警告：切勿删除-->
+     <!--[if IE 6]> <a class="follow-btn ie6png mmmzw"></a><![endif]-->
+
+	 <div class="mmclear"></div>
+
+
+	 <div class="mmcontent t-20">
+		<span class="pc157AC0">项目简介：</span>
+
+        {{ public.desc }}
+
+    <br/>
+         <hr>
+    <span class="pc157AC0">项目介绍：</span>
+         {{ public.content }}
+
+
+
+	 </div>
+
+
+
+
+
+  </div>
+{% endfor %}
+
+</div>
+
+
+
+
+{% endblock %}
+	</div>
+</div>

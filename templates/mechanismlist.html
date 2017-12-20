@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}投资机构{% endblock %}
+{% block style %}
+    <script type="text/javascript" src="{% static 'js/bioV4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.lazyload.mini.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/tzjg_list.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/tzjg_list.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
+    <div class="container pb-15">
+    <!-- Example row of columns -->
+    <div class="row">
+    <div class="span12">
+
+        <!--搜索-->
+
+
+        <div class="clearfix">
+
+            <div class="pull-left classifyDIV pt-10 my1D6597">投资机构 <span><a href="javascript:;">点击此处认证投资人身份</a>，可获得项目更多的信息,享受我们的服务</span>
+            </div>
+
+            <div class="pull-right t-20 classifySearch" style="position: relative;">
+                <form action="" method="get" style="margin:0px; padding:0px;">
+                   </form>
+            </div>
+        </div>
+        <!--搜索结束-->
+        <!-- <div class="mmdata"><a href="javascript:;">点击此处认证投资人身份</a>， 可获得项目更多的信息,享受我们的服务</div>-->
+
+        <!--投资机构-->
+        <div class="mylistshow b-20 t-20" id="mmlistshow2">
+            <div class="more"><img id="mmmore" src="{% static 'images/more_.jpg' %}" alt="hide"/></div>
+            <dl class="mydllist">
+                <dd>投资机构：</dd>
+                <dd class="selected"><span class="ml"></span><span class="mm"><a
+                        href="/mechanismlist/">全部</a></span><span class="mr"></span></dd>
+
+                {% for mechanismlist in mechanismlist.object_list %}
+                    <dd><span class="ml"></span><span class="mm"><a
+                            href="?mechanism-name={{ mechanismlist.c_name }}">{{ mechanismlist.c_name }}</a></span><span
+                            class="mr"></span></dd>
+                {% endfor %}
+            </dl>
+            <div class="mmclear"></div>
+        </div>
+
+        <!--投资结构结束-->
+
+        <!--关注领域-->
+        <div class="mylistshow b-20" id="mmlistshow">
+            <div class="downjiao"><img src="{% static 'images/downjiao.jpg' %}" alt="hide"/></div>
+            <dl class="mydllist">
+                <dd>关注领域：</dd>
+                <dd class="selected"><span class="ml"></span><span class="mm"><a
+                        href="/mechanismlist/">全部</a></span><span class="mr"></span></dd>
+                {% for mechanismlist in mechanismlist.object_list %}
+                    <dd><span class="ml"></span><span class="mm"><a
+                            href="?category={{ mechanismlist.category }}">{{ mechanismlist.category }}</a></span><span
+                            class="mr"></span></dd>
+                {% endfor %}
+            </dl>
+
+            <div class="mmclear"></div>
+        </div>
+        <!--关注领域结束-->
+
+
+        <!--列表开始-->
+
+        <!--第一个-->
+        {% for mechanismlist in mechanismlist.object_list %}
+            <div class="label-div b-30 border-all pb-20 pt-5" style="position: relative; padding-left: 0;">
+
+                <div class="pl-20" style="margin-left: 1px;margin-top: 3px;">
+                    <span class="fc1D6597" title="研究">{{ mechanismlist.category }}</span>
+                </div>
+
+                <div class="news-list">
+
+
+                    <div class="clearfix pt-3">
+                        <div class="index-news-img spanm3 pull-left pt-5">
+                            <a href="javascript:;" title="标题标题标题" target="_blank" rel="bookmark">
+                                <img class="lazyloadimg" alt="标题标题标题标题标题标题"
+                                     src="{{ MEDIA_URL }}{{ mechanismlist.img }}"/></a>
+                        </div>
+                        <div class="offset3 intro">
+                            <h1>
+                                <a title="标题标题标题标题" target="_blank"
+                                   href="/mechanismlist-{{ mechanismlist.id }}/">{{ mechanismlist.c_name }}</a>
+                            </h1>
+
+                            <div class="clearfix" style="height: 22px;margin-top: 0px;">
+                                <div class="pull-left myxx">
+
+                                    <i class="m"><a href="javascript:;" target="_blank">{{ mechanismlist.core }}</a></i>
+                                    <i class="m"><a href="javascript:;" target="_blank">{{ mechanismlist.category }}</a></i>
+                                    <i class="m">2013/03/02</i>
+                                </div>
+
+                                <div class="pull-right">
+                                    <a class="follow-btn pr-10 ie6png" href="javascript:void(0);"
+                                       title="0人关注	0人分享	3人评论" data-id="104417" data-type="news">3人</a>
+                                    <a class="read-btn ie6png" href="javascript:void(0);"
+                                       title="277次阅读">{{ mechanismlist.look_num }}</a>
+                                </div>
+                            </div>
+                            <p class="t-1">{{ mechanismlist.desc }}</p>
+
+                            <div class="clearfix">
+                                <a href="javascript:;" title="阅读全文" target="_blank" rel="bookmark"
+                                   class="read-all pull-left">阅读全文</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <!--第一个结束-->
+
+
+        <!--列表结束-->
+
+
+        <div class="pagination center pagination-large pt-20">
+            <ul id="yw1" class="yiiPager">
+
+                {% if mechanismlist.has_previous %}
+      <li class="previous">  <a href="?{{ mechanismlist.previous_page_number.querystring }}">&lsaquo;&lsaquo;上一页</a></li>
+    {% endif %}
+
+     {% for page in mechanismlist.pages %}
+        {% if page %}
+            {% ifequal page mechanismlist.number %}
+
+                <li class="page selected"><a href="">{{ page }}</a></li>
+            {% else %}
+                <li class="page"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+            {% endifequal %}
+        {% else %}
+            ...
+        {% endif %}
+     {% endfor %}
+
+    {% if mechanismlist.has_next %}
+        <li class="next"><a href="?{{ mechanismlist.next_page_number.querystring }}">下一页 &rsaquo;&rsaquo;</a></li>
+
+    {% endif %}
+
+
+
+
+
+
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+<!--右侧代码-->
+
+
+</div>
+</div>
+</div>
+
+

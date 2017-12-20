@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}项目信息{% endblock %}
+{% block style %}
+    <script type="text/javascript" src="{% static 'js/bioV4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.lazyload.mini.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/xmdata.css' %}"/>
+
+
+{% endblock %}
+
+    
+    
+    {% block content %}
+
+
+	<div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
+	<div class="container pb-15">
+	<!-- Example row of columns -->
+	<div class="row">
+		<div class="span12">
+       
+       <!--搜索-->
+       
+       
+	   <div class="clearfix">
+         
+				<div class="pull-left classifyDIV pt-10 my1D6597">项目数据库	<span>欢迎<a href="/public/">提交新项目</a>,让产品快速打响知名度,赢得投资人青睐</span></div>
+				
+                <div class="pull-right t-20 classifySearch" style="position: relative;">
+                  <form action="/publiclist/" method="post" style="margin:0px; padding:0px;" id="search">
+					{% csrf_token %}
+                  </form>
+				</div>
+		 </div>
+									
+          <!--搜索结束--> 
+  <!-- <div class="mmdata">欢迎<a href="">提交新项目</a>,让产品快速打响知名度,赢得投资人青睐</div>-->        
+          
+  <div class="mylistshow b-20  t-20" id="mmlistshow">
+  <div class="downjiao"><img src="{% static 'images/downjiao.jpg' %}" alt="hide" /></div>
+  <dl class="mydllist">
+  <dd>地区：</dd>
+  <dd class="selected"><span class="ml"></span><span class="mm"><a href="/publiclist/">全部</a></span><span class="mr"></span></dd>
+    {% for city in city %}
+  <dd><span class="ml"></span><a href="?city={{ city.name }}"><span class="mm">{{ city.name }}</span></a><span class="mr"></span></dd>
+    {% endfor %}
+
+  </dl>
+
+ 
+  </div>
+         
+            
+ <!--列表开始-->     
+                         
+   <!--第一个    左对齐      pull-left-->
+       {% for list in list.object_list %}
+  <div class="label-div b-20 border-all pb-10 pt-5 pull-left" style="width:47%; width:47% \9; position: relative; padding-left: 0; height:auto;">
+  
+   <div class="clearfix pt-3">
+		  <div class="index-news-img spanm3 pull-left pt-5">
+			<a href="javascript:;" title="标题标题标题" target="_blank" rel="bookmark">
+             <img class="lazyloadimg" alt="标题标题标题标题标题标题" src="{{ MEDIA_URL }}{{ list.avatar }}"/></a>
+		 </div>
+         
+         
+  	<div class="offset3 intro mmwidth">
+		<h1>
+        <a title="标题标题标题标题" target="_blank" href="/public-{{ list.id }}/">{{ list.product_name }}</a>
+        </h1>
+	    <p class="t-1 mt1">{{ list.desc }}</p>
+    
+      <div class="clearfix" style="height:auto;margin-top:0px;">
+			<div class="pull-left myxx">	
+          <i class="mr">2013/03/02</i>	
+                <i class="m"><a href="javascript:;" target="_blank">{{ list.addr }}</a></i>
+                <i class="m"><a href="javascript:;" target="_blank">{{ list.category }}</a></i>
+        	</div>
+            <div class="mmclear"></div>
+          <div class="">
+{#			<a class="follow-btn pr-10 ie6png" href="javascript:void(0);" title="0人关注	0人分享	3人评论" data-id="104417" data-type="news">3人</a>#}
+{#			<a class="read-btn ie6png" href="javascript:void(0);" title="277次阅读">277次</a>#}
+		 </div>
+         
+	</div>
+ 
+    </div>
+  
+    </div>
+   
+     
+</div>
+         {% endfor %}
+    <!--第一个结束-->      
+
+
+<div class="mmclear"></div>            
+ 
+<div class="pagination center pagination-large pt-20">
+<ul id="yw1" class="yiiPager">
+
+    {% if list.has_previous %}
+      <li class="previous">  <a href="?{{ list.previous_page_number.querystring }}">&lsaquo;&lsaquo;上一页</a></li>
+    {% endif %}
+
+     {% for page in list.pages %}
+        {% if page %}
+            {% ifequal page list.number %}
+
+                <li class="page selected"><a href="">{{ page }}</a></li>
+            {% else %}
+                <li class="page"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+            {% endifequal %}
+        {% else %}
+            ...
+        {% endif %}
+     {% endfor %}
+
+    {% if list.has_next %}
+        <li class="next"><a href="?{{ list.next_page_number.querystring }}">下一页 &rsaquo;&rsaquo;</a></li>
+
+    {% endif %}
+
+
+
+
+
+
+
+
+</ul>
+</div>
+		</div>
+        
+      {% endblock %}
+      <!--右侧代码-->  
+
+	 
+            
+		</div>
+	</div>
+</div>
+

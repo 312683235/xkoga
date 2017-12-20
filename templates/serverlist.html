@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}创新服务{% endblock %}
+
+{% block style %}
+    <script type="text/javascript" src="{% static 'js/bioV4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.lazyload.mini.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/tzjg_list.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/tzjg_list.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="hr tp-div-nexthr" style="margin-top: 0;margin-bottom: 0;padding: 0;"></div>
+    <div class="container pb-15">
+    <!-- Example row of columns -->
+    <div class="row">
+    <div class="span12">
+
+        <!--搜索-->
+
+
+        <div class="clearfix">
+
+            <div class="pull-left classifyDIV pt-10 my1D6597">创新服务</div>
+
+            <div class="pull-right t-20 classifySearch" style="position: relative;">
+                <form action="?" method="get" style="margin:0px; padding:0px;">
+                    <input id="search-input" type="text" class="search-input pull-left span4" value=""/>
+                    <a href="javascript:void(0);" title="搜索" class="search-btn-css pull-left search-btn"></a>
+                </form>
+            </div>
+        </div>
+
+        <!--搜索结束-->
+
+            <div class="mylistshow b-20 t-20" id="mmlistshow">
+                <div class="downjiao"><img src="{% static 'images/downjiao.jpg' %}" alt="hide"/></div>
+                <dl class="mydllist">
+                    <dd>城市：</dd>
+                    <dd class="selected"><span class="ml"></span><span class="mm"><a href="">全部</a></span><span
+                            class="mr"></span></dd>
+                    {% for city in city %}
+                        <dd><span class="ml"></span><span class="mm"><a href="?city={{ city.id }}">{{ city.name }}</a></span><span
+                                class="mr"></span></dd>
+                    {% endfor %}
+                </dl>
+
+                <div class="mmclear"></div>
+            </div>
+
+            <!--列表开始-->
+
+            <!--第一个-->
+    {% for sers in sers.object_list %}
+            <div class="label-div b-30 border-all pb-20 pt-5" style="position: relative; padding-left: 0;">
+
+                <div class="pl-20" style="margin-left: 1px;margin-top: 3px;">
+
+                </div>
+
+                <div class="news-list">
+
+                    <div class="clearfix none-768 pl-20" style="position: absolute;top: 0;right: 15px;">
+
+                    </div>
+
+                    <div class="clearfix pt-3">
+                        <div class="index-news-img spanm3 pull-left pt-5">
+                            <a href="/server-{{ sers.id }}/" title="标题标题标题" target="_blank" rel="bookmark">
+                                <img class="lazyloadimg" alt="标题标题标题标题标题标题" src="{{ MEDIA_URL }}{{ sers.img }}"/></a>
+                        </div>
+                        <div class="offset3 intro">
+                            <h1>
+                                <a title="标题标题标题标题" target="_blank" href="/server-{{ sers.id }}/">{{ sers.title }}</a>
+                            </h1>
+
+                            <div class="clearfix" style="height: 22px;margin-top: 0px;">
+                                <div class="pull-left myxx">
+
+                                    <i class="m"><a href="javascript:;" target="_blank">{{ sers.city }}</a></i>
+                                    <i class="m"><a href="javascript:;" target="_blank">{{ sers.category }}</a></i>
+                                    <i class="m">2013/03/02</i>
+                                </div>
+
+                                <div class="pull-right">
+                                    <a class="read-btn ie6png" href="javascript:void(0);"
+                                       title="277次阅读">{{ sers.look_num }}</a>
+                                </div>
+                            </div>
+                            <p class="t-1">{{ sers.desc }}</p>
+
+                            <div class="clearfix">
+                                <a href="/server-{{ sers.id }}/" title="阅读全文" target="_blank" rel="bookmark"
+                                   class="read-all pull-left">阅读全文</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--第一个结束-->
+
+        {% endfor %}
+
+
+        <!--列表结束-->
+
+
+        <div class="pagination center pagination-large pt-20">
+            <ul id="yw1" class="yiiPager">
+
+                {% if sers.has_previous %}
+      <li class="previous">  <a href="?{{ sers.previous_page_number.querystring }}">&lsaquo;&lsaquo;上一页</a></li>
+    {% endif %}
+
+     {% for page in sers.pages %}
+        {% if page %}
+            {% ifequal page sers.number %}
+
+                <li class="page selected"><a href="">{{ page }}</a></li>
+            {% else %}
+                <li class="page"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+            {% endifequal %}
+        {% else %}
+            ...
+        {% endif %}
+     {% endfor %}
+
+    {% if sers.has_next %}
+        <li class="next"><a href="?{{ sers.next_page_number.querystring }}">下一页 &rsaquo;&rsaquo;</a></li>
+
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+</div>
+</div>
+</div>
+
+    
+
+
