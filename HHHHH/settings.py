@@ -137,8 +137,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 #邮件发送配置
 EMAIL_HOST = 'smtp.sina.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'qq329779955@sina.com'
-EMAIL_HOST_PASSWORD = 'hejunlai1516'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_FROM = 'qq329779955@sina.com'
 
